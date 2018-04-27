@@ -105,7 +105,7 @@ describe('BlogPost API resource', function() {
 
     it('should return all existing posts', function() {
       // strategy:
-      //    1. get back all BlogPosts returned by by GET request to `/restaurants`
+      //    1. get back all BlogPosts returned by by GET request to `/posts`
       //    2. prove res has right status, data type
       //    3. prove the number of BlogPost we got back is equal to number
       //       in db.
@@ -129,7 +129,7 @@ describe('BlogPost API resource', function() {
     });
 
 
-    it('should return restaurants with right fields', function() {
+    it('should return posts with right fields', function() {
       // Strategy: Get back all posts, and ensure they have expected keys
 
       let resBlogPost;
@@ -141,7 +141,7 @@ describe('BlogPost API resource', function() {
           expect(res.body.posts).to.be.a('array');
           expect(res.body.posts).to.have.length.of.at.least(1);
 
-          res.body.posts.forEach(function(restaurant) {
+          res.body.posts.forEach(function(post) {
             expect(post).to.be.a('object');
             expect(post).to.include.keys(
               'id', 'title', 'content', 'author');
@@ -161,7 +161,7 @@ describe('BlogPost API resource', function() {
 
   describe('POST endpoint', function() {
     // strategy: make a POST request with data,
-    // then prove that the restaurant we get back has
+    // then prove that the post we get back has
     // right keys, and that `id` is there (which means
     // the data was inserted into db)
     it('should add a new BlogPost', function() {
@@ -182,7 +182,7 @@ describe('BlogPost API resource', function() {
           expect(res.body.id).to.not.be.null;
           expect(res.body.content).to.equal(newBlogPost.content);
           expect(res.body.author).to.equal(newBlogPost.author);
-          return Restaurant.findById(res.body.id);
+          return BlogPost.findById(res.body.id);
         })
         .then(function(post) {
           expect(post.title).to.equal(newBlogPost.title);
@@ -195,10 +195,10 @@ describe('BlogPost API resource', function() {
   describe('PUT endpoint', function() {
 
     // strategy:
-    //  1. Get an existing restaurant from db
-    //  2. Make a PUT request to update that restaurant
-    //  3. Prove restaurant returned by request contains data we sent
-    //  4. Prove restaurant in db is correctly updated
+    //  1. Get an existing post from db
+    //  2. Make a PUT request to update that post
+    //  3. Prove post returned by request contains data we sent
+    //  4. Prove post in db is correctly updated
     it('should update fields you send over', function() {
       const updateData = {
         title: 'fofofofofofofof',
@@ -230,10 +230,10 @@ describe('BlogPost API resource', function() {
 
   describe('DELETE endpoint', function() {
     // strategy:
-    //  1. get a restaurant
-    //  2. make a DELETE request for that restaurant's id
+    //  1. get a post
+    //  2. make a DELETE request for that post's id
     //  3. assert that response has right status code
-    //  4. prove that restaurant with the id doesn't exist in db anymore
+    //  4. prove that post with the id doesn't exist in db anymore
     it('delete a BlogPost by id', function() {
 
       let post;
