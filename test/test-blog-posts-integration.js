@@ -120,11 +120,11 @@ describe('BlogPost API resource', function() {
           res = _res;
           expect(res).to.have.status(200);
           // otherwise our db seeding didn't work
-          expect(res.body.posts).to.have.length.of.at.least(1);
+          expect(res.body.posts).to.have.lengthOf.at.least(1);
           return BlogPost.count();
         })
-        .then(function(count) {
-          expect(res.body.posts).to.have.length.of(count);
+        .then(function(count => {
+          expect(res.body.posts).to.have.lengthOf(count);
         });
     });
 
@@ -176,7 +176,7 @@ describe('BlogPost API resource', function() {
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys(
-            'id', 'name', 'content', 'author');
+            'id', 'title', 'content', 'author');
           expect(res.body.title).to.equal(newBlogPost.title);
           // cause Mongo should have created id on insertion
           expect(res.body.id).to.not.be.null;
