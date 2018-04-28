@@ -115,12 +115,12 @@ describe('BlogPost API resource', function() {
       let res;
       return chai.request(app)
         .get('/posts')
-        .then(function(_res) {
+        .then(_res => {
           // so subsequent .then blocks can access response object
           res = _res;
           expect(res).to.have.status(200);
           // otherwise our db seeding didn't work
-          expect(res.body.posts).to.have.lengthOf.at.least(1);
+          expect(res.body).should.have.lengthOf.at.least(1);
           return BlogPost.count();
         })
         .then(function(count) {
@@ -138,8 +138,8 @@ describe('BlogPost API resource', function() {
         .then(function(res) {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body.posts).to.be.a('array');
-          expect(res.body.posts).to.have.length.of.at.least(1);
+          expect(res.body).to.be.a('array');
+          expect(res.body).to.have.length.of.at.least(1);
 
           res.body.posts.forEach(function(post) {
             expect(post).to.be.a('object');
