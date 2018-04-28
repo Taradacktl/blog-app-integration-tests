@@ -115,7 +115,7 @@ describe('BlogPost API resource', function() {
       let res;
       return chai.request(app)
         .get('/posts')
-        .then(_res => {
+        .then(function(_res) {
           // so subsequent .then blocks can access response object
           res = _res;
           expect(res).to.have.status(200);
