@@ -146,7 +146,7 @@ describe('BlogPost API resource', function() {
             expect(post).to.include.keys(
               'id', 'title', 'content', 'author');
           });
-          resBlogPost = res.body.posts[0];
+          resBlogPost = res.body[0];
           return BlogPost.findById(resBlogPost.id);
         })
         .then(function(post) {
