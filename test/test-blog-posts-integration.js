@@ -124,7 +124,7 @@ describe('BlogPost API resource', function() {
           return BlogPost.count();
         })
         .then(function(count) {
-          expect(res.body.posts).to.have.lengthOf(count);
+          expect(res.body).should.have.lengthOf(count);
         });
     });
 
@@ -141,7 +141,7 @@ describe('BlogPost API resource', function() {
           expect(res.body).to.be.a('array');
           expect(res.body).to.have.length.of.at.least(1);
 
-          res.body.posts.forEach(function(post) {
+          res.body.forEach(function(post) {
             expect(post).to.be.a('object');
             expect(post).to.include.keys(
               'id', 'title', 'content', 'author');
