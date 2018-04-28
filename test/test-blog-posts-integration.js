@@ -123,7 +123,7 @@ describe('BlogPost API resource', function() {
           expect(res.body.posts).to.have.lengthOf.at.least(1);
           return BlogPost.count();
         })
-        .then(function(count => {
+        .then(function(count) {
           expect(res.body.posts).to.have.lengthOf(count);
         });
     });
