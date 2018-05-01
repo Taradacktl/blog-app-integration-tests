@@ -120,7 +120,7 @@ describe('BlogPost API resource', function() {
           res = _res;
           expect(res).to.have.status(200);
           // otherwise our db seeding didn't work
-          expect(res.body).should.have.lengthOf.at.least(1);
+          res.body.should.have.lengthOf.at.least(1);
           return BlogPost.count();
         })
         .then(function(count) {
